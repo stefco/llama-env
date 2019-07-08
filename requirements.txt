@@ -1,0 +1,24 @@
+# SEE LLAMA REPOSITORY FOR MASTER COPY
+# argcomplete
+# astropy
+# flask
+# graphviz
+# python-dateutil
+# slackclient
+# pygcn
+# h5py
+# healpy  - i believe this is installed by ligo deps already
+# lxml
+# matplotlib
+# numpy
+# psutil
+# scipy
+# six
+# Deprecated
+itermplot
+twilio
+untangle
+voevent-parse
+python-digitalocean
+fastentrypoints
+json2html
