@@ -6,72 +6,80 @@
 # https://github.com/ContinuumIO/docker-images/tree/master/miniconda3
 # FROM continuumio/miniconda3
 # https://hub.docker.com/_/debian/
-FROM debian:stretch
+FROM debian:stretch-slim
 
 # set up anaconda for user 'llama'
 # http://www.science.smith.edu/dftwiki/index.php/Tutorial:_Docker_Anaconda_Python_--_4
 RUN adduser --disabled-password --gecos '' llama
-RUN apt-get -y update
-RUN apt-get -y install curl sudo bzip2 ncdu man git
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+# RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+# install git-lfs
+RUN curl -s \
+        https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh \
+        | sudo bash
+RUN apt-get -y update && apt-get -y install curl bzip2 git git-lfs
+
 
 # install LSC DataGrid
-RUN curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh >/tmp/ldg-client.sh
-RUN bash -c 'v=1; until [ $v -eq 0 ]; do echo LDG; bash /tmp/ldg-client.sh; v=$?; done'
+RUN bash -c ' \
+    v=1 \
+    until [ $v -eq 0 ]; do \
+        echo LDG \
+        curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash \
+        v=$? \
+    done \
+'
 
 # switch to user 'llama'
 USER llama
+COPY . ~/provision  # copies all requirements and docker files
 
 # Set the working directory to /app
 WORKDIR /home/llama
 
-# install conda
-RUN chmod a+rwx /home/llama
-RUN curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-RUN bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /home/llama/miniconda3
-RUN rm Miniconda3-latest-Linux-x86_64.sh
+# install git-lfs and conda
+RUN bash -c ' \
+    git lfs install \
+    curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+        && Miniconda3-latest-Linux-x86_64.sh -b -f -p /home/llama/miniconda3 \
+        && rm Miniconda3-latest-Linux-x86_64.sh \
+        && /home/llama/miniconda3/bin/conda update conda \
+        && /home/llama/miniconda3/bin/conda update --all \
+        && /home/llama/miniconda3/bin/conda config --add channels conda-forge \
+        && /home/llama/miniconda3/bin/conda config --add channels conda-forge \
+        && /home/llama/miniconda3/bin/conda env create -f ~/provision/llama-py37.yml \
+        && /home/llama/miniconda3/bin/conda init bash \
+        && echo "conda activate llama-py37" >>~/.bashrc
+        && cat ~/.bashrc
+'
+# install pip requirements and delete copied files
+RUN bash -i -c 'pip install -r ~/provision/requirements.txt && rm -r ~/provision'
 
-ENV OLDPATH "$PATH"
-ENV PATH /home/llama/miniconda3/bin:"$PATH"
-
-# update conda
-RUN conda update conda
-# RUN conda update miniconda3
-RUN conda update --all
+# ENV PATH /home/llama/miniconda3/bin:"$PATH"
 
 # install ligo environment
 # based on ligo conda environment at
-# https://git.ligo.org/lscsoft/conda/raw/master/environment-py36.yml
-COPY llama-py37.yml .
-RUN conda config --add channels conda-forge
-RUN conda env create -f llama-py37.yml
-RUN rm llama-py37.yml
-RUN conda init bash
-RUN echo 'conda activate llama-py37' >>~/.bashrc
-RUN cat ~/.bashrc
+# https://git.ligo.org/lscsoft/conda/raw/master/environment-py37.yml
+# RUN conda config --add channels conda-forge
+# RUN conda env create -f llama-py37.yml
+# RUN rm llama-py37.yml
+# RUN conda init bash
+# RUN echo 'conda activate llama-py37' >>~/.bashrc
+# RUN cat ~/.bashrc
 
 # install llama requirements
-COPY requirements.txt .
-ENV PATH "$OLDPATH"
-RUN bash -i -c 'pip install -r requirements.txt'
-RUN rm requirements.txt
+# ENV PATH "$OLDPATH"
+# RUN bash -i -c 'pip install -r requirements.txt'
+# RUN rm requirements.txt
 
-# install git-lfs
-USER root
-RUN curl -s \
-        https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh \
-        | sudo bash
-RUN apt-get -y install git-lfs
-USER llama
-RUN git lfs install
-USER root
-
-# Install llama
-COPY . /home/llama/multimessenger-pipeline
-WORKDIR /home/llama/multimessenger-pipeline
-USER root
+# Change owner to 'llama'
+# TODO fix this; it is very slow and seems obviously wrong. must be another way
+# to set ownership to llama...
 RUN chown -R llama:llama /home/llama
-USER llama
+# USER llama
+# COPY . /home/llama/multimessenger-pipeline
+# WORKDIR /home/llama/multimessenger-pipeline
+# USER root
+# USER llama
 # RUN bash -i -c "python setup.py develop"
         # llama --help; \
         # make test; \
