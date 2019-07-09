@@ -15,6 +15,10 @@ RUN apt-get -y update
 RUN apt-get -y install curl sudo bzip2 ncdu man git
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
+# install LSC DataGrid
+RUN curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh >/tmp/ldg-client.sh
+RUN bash -c 'v=1; until [ $v -eq 0 ]; do echo LDG; bash /tmp/ldg-client.sh; v=$?; done'
+
 # switch to user 'llama'
 USER llama
 
