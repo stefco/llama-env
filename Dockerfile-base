@@ -1,7 +1,10 @@
-# based on tutorials:
+# some tips:
 # https://medium.com/@chadlagore/conda-environments-with-docker-82cdc9d25754
 # https://docs.docker.com/get-started/part2/
 # https://www.codacy.com/blog/five-ways-to-slim-your-docker-images/
+# https://hackernoon.com/tips-to-reduce-docker-image-sizes-876095da3b34
+
+# linter: https://www.fromlatest.io/#/
 
 # Conda's python 3.7 distribution
 # https://github.com/ContinuumIO/docker-images/tree/master/miniconda3
@@ -18,4 +21,11 @@ RUN bash -c ' \
         && apt-get install -y -no-install-recommends git-lfs \
         && rm -rf /var/lib/apt/lists/* \
     chown -R llama:llama /home/llama \
+    su llama --login --shell bash --command " \
+        curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh | bash -s -- -b-f -p /home/llama/miniconda3 \
+            && /home/llama/miniconda3/bin/conda update conda \
+            && /home/llama/miniconda3/bin/conda update --all \
+            && /home/llama/miniconda3/bin/conda config --add channels conda-forge \
+            && /home/llama/miniconda3/bin/conda init bash \
+    " \
 '
