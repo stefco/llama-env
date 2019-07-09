@@ -11,7 +11,8 @@ RUN su llama --command "bash -i -c ' \
         && cat ~/.bashrc \
         && source ~/.bashrc \
         && pip install -r ~/provision/requirements.txt \
-        && rm ~/provision \
+        && rm -r ~/miniconda3/pkgs \
+        && rm -r ~/provision \
 '"
 # install pip requirements and delete copied files
 # RUN bash -i -c 'pip install -r ~/provision/requirements.txt && rm -r ~/provision'

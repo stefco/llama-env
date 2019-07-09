@@ -1,0 +1,23 @@
+# need glibc installed for proprietary stuff like conda. still a small layer.
+FROM frolvlad/alpine-glibc:alpine-3.10
+
+# set up anaconda for user 'llama' and install datagrid
+# __curl function taken from:
+# https://unix.stackexchange.com/questions/83926/how-to-download-a-file-using-just-bash-and-nothing-else-no-curl-wget-perl-et
+RUN adduser --disabled-password --gecos "" llama \
+        && apk --no-cache add bash curl bzip2 \
+        && chown -R llama:llama /home/llama \
+        && su llama -c " \
+            cd ~ \
+                && curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh >~/miniconda.sh \
+                && sh ~/miniconda.sh -b -f -p /home/llama/miniconda3 \
+                && rm ~/miniconda.sh \
+                && /home/llama/miniconda3/bin/conda update conda \
+                && /home/llama/miniconda3/bin/conda update --all \
+                && /home/llama/miniconda3/bin/conda config --add channels conda-forge \
+                && /home/llama/miniconda3/bin/conda init bash \
+                && rm -r ~/miniconda3/pkgs \
+        "
+# && apt-get install -y --no-install-recommends curl bzip2 git \
+# && curl https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
+# && bash -l -c "apt-get install -y --no-install-recommends git-lfs" \
