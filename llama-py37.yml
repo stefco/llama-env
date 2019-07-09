@@ -81,3 +81,4 @@ dependencies:
   - scipy
   - six
   - deprecated
+  - boto3

@@ -75,3 +75,10 @@ dependencies:
   - pygcn  # only available with py_0 variant
   - h5py
   - lxml
+  # - matplotlib  # already installed by LIGO dependencies
+  # - numpy  # already installed by LIGO dependencies
+  - psutil
+  - scipy
+  - six
+  - deprecated
+  - boto3
