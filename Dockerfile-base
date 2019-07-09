@@ -1,0 +1,21 @@
+# based on tutorials:
+# https://medium.com/@chadlagore/conda-environments-with-docker-82cdc9d25754
+# https://docs.docker.com/get-started/part2/
+# https://www.codacy.com/blog/five-ways-to-slim-your-docker-images/
+
+# Conda's python 3.7 distribution
+# https://github.com/ContinuumIO/docker-images/tree/master/miniconda3
+# FROM continuumio/miniconda3
+# https://hub.docker.com/_/debian/
+FROM debian:stretch-slim
+
+# set up anaconda for user 'llama' and install datagrid
+RUN bash -c ' \
+    adduser --disabled-password --gecos '' llama \
+    apt-get -y update \
+        && apt-get install -y -no-install-recommends curl bzip2 git \
+        && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
+        && apt-get install -y -no-install-recommends git-lfs \
+        && rm -rf /var/lib/apt/lists/* \
+    chown -R llama:llama /home/llama \
+'
