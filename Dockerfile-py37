@@ -1,18 +1,18 @@
-FROM stefco:/llama:datagrid
+FROM stefco/llama-env:base
 
-COPY . /user/llama/provision  # copies all requirements and docker files
+COPY . /home/llama/provision
 
 # install git-lfs and conda
-RUN su llama --login --shell bash --command ' \
-    cd ~
-    git lfs install \
-    conda env create -f ~/provision/llama-py37.yml \
-        && echo "conda activate llama-py37" >>~/.bashrc \
+RUN su llama --command "bash -i -c ' \
+    cd ~ \
+        && type conda \
+        && conda env create -f ~/provision/llama-py37.yml \
+        && echo conda\ activate\ llama-py37\ >>~/.bashrc \
         && cat ~/.bashrc \
         && source ~/.bashrc \
         && pip install -r ~/provision/requirements.txt \
-        && rm ~/provision
-'
+        && rm ~/provision \
+'"
 # install pip requirements and delete copied files
 # RUN bash -i -c 'pip install -r ~/provision/requirements.txt && rm -r ~/provision'
 
