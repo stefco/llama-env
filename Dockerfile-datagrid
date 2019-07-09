@@ -1,11 +1,10 @@
-FROM stefco/llama:base
+FROM stefco/llama-env:base
 
 # install LSC DataGrid
 RUN bash -c ' \
-    v=1 \
+    v=1; \
     until [ $v -eq 0 ]; do \
-        echo LDG \
-        curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash \
-        v=$? \
-    done \
+        curl https://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash; \
+        v=$?; \
+    done && rm -rf /var/lib/apt/lists/* \
 '
