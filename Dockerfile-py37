@@ -3,7 +3,7 @@ FROM stefco/llama-env:alpine
 COPY . /home/llama/provision
 
 # install git-lfs and conda
-RUN su llama --command "bash -i -c ' \
+RUN su llama -c "bash -i -c ' \
     cd ~ \
         && type conda \
         && conda env create -f ~/provision/llama-py37.yml \
