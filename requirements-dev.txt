@@ -1,0 +1,17 @@
+yappi
+ipdb
+git-of-theseus
+pytest
+pytest-cov
+pytest-html
+psycopg2
+snakeviz
+restructuredtext_lint
+sphinx
+sphinx_rtd_theme
+sphinxcontrib-napoleon
+sphinx-argparse
+recommonmark
+setuptools-scm
+twine
+pypiprivate
