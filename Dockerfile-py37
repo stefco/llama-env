@@ -1,4 +1,4 @@
-FROM stefco/llama-env:base
+FROM stefco/llama-env:alpine
 
 COPY . /home/llama/provision
 
@@ -14,21 +14,4 @@ RUN su llama --command "bash -i -c ' \
         && rm -r ~/miniconda3/pkgs \
 '" \
     && rm -rf /home/llama/provision
-# install pip requirements and delete copied files
-# RUN bash -i -c 'pip install -r ~/provision/requirements.txt && rm -r ~/provision'
-
-# ENV PATH /home/llama/miniconda3/bin:"$PATH"
-
-# Change owner to 'llama'
-# TODO fix this; it is very slow and seems obviously wrong. must be another way
-# to set ownership to llama...
-# RUN chown -R llama:llama /home/llama
-# RUN bash -i -c "python setup.py develop"
-        # llama --help; \
-        # make test; \
-
-# Make port 80 available to the world outside this container
-# EXPOSE 80gg
-
-# Run app.py when the container launches
-# CMD ["python", "app.py"]
+USER llama
