@@ -1,0 +1,6 @@
+# For building and uploading conda packages and environments
+FROM stefco/llama-env:py37-0.0.10
+
+RUN su llama -c 'bash -i -c " \
+    conda install anaconda-client conda-build \
+"'
