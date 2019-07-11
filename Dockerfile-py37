@@ -1,4 +1,4 @@
-FROM stefco/llama-env:alpine
+FROM stefco/llama-base:alpine
 
 COPY . /home/llama/provision
 
