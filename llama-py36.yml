@@ -83,3 +83,4 @@ dependencies:
   - deprecated
   - boto3
   - plumbum
+  - psycopg2
