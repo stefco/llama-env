@@ -15,3 +15,4 @@ RUN su llama -c "bash -i -c ' \
 '" \
     && rm -rf /home/llama/provision
 USER llama
+WORKDIR /home/llama
