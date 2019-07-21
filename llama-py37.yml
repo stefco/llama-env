@@ -84,3 +84,4 @@ dependencies:
   - boto3
   - plumbum
   - psycopg2
+  - pygments
