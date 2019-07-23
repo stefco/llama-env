@@ -3,10 +3,12 @@
 # https://docs.docker.com/docker-cloud/builds/advanced/
 # https://semver.org/
 
+REPO="$(awk -F'/' '{print $(NF-1) "/" $NF}' <<<"${DOCKER_REPO}")"
+NAME="${REPO}:${DOCKER_TAG}"
 function add_tag_suffix() {
     echo "[***] Adding tag ${1}"
-    docker tag $IMAGE_NAME $IMAGE_NAME-$1
-    docker push $DOCKER_REPO:$1
+    docker tag $NAME $NAME-$1
+    docker push $NAME:$1
 }
 
 TAG=`git describe --tag --match "v*"`
