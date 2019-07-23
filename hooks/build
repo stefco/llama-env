@@ -7,22 +7,16 @@ echo "[***] Build hook running"
 
 REPO="$(awk -F'/' '{print $(NF-1) "/" $NF}' <<<"${DOCKER_REPO}")"
 NAME="${REPO}:${DOCKER_TAG}"
-DOCKER_META="- version: $(git describe --tags --always)
-  commit: $(git rev-parse HEAD)
-  url: $(git config --get remote.origin.url)
-  branch: $(git rev-parse --abbrev-ref HEAD)
-  date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
-  docker_repo: ${REPO}
-  docker_tag: ${DOCKER_TAG}
-  image_name: ${NAME}
-  dockerfile_path: ${DOCKERFILE_PATH}
-  dockerfile: |
-$(sed 's/^/    /' <${DOCKERFILE_PATH})
-"
-
-printf "DOCKER_META:\n%s" "${DOCKER_META}"
 
 docker build \
-    --build-arg "${DOCKER_META}" \
+    --build-arg NAME="${NAME}" \
+    --build-arg VERSION="$(git describe --tags --always)" \
+    --build-arg COMMIT="$(git rev-parse HEAD)" \
+    --build-arg URL="$(git config --get remote.origin.url)" \
+    --build-arg BRANCH="$(git rev-parse --abbrev-ref HEAD)" \
+    --build-arg DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --build-arg REPO="${REPO}" \
+    --build-arg DOCKER_TAG="${DOCKER_TAG}" \
+    --build-arg DOCKERFILE_PATH="${DOCKERFILE_PATH}" \
     --file "${DOCKERFILE_PATH}" \
     -t ${NAME} .
