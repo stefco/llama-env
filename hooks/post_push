@@ -3,9 +3,9 @@
 # https://docs.docker.com/docker-cloud/builds/advanced/
 # https://semver.org/
 
-function add_tag() {
+function add_tag_suffix() {
     echo "[***] Adding tag ${1}"
-    docker tag $IMAGE_NAME $DOCKER_REPO:$1
+    docker tag $IMAGE_NAME $IMAGE_NAME-$1
     docker push $DOCKER_REPO:$1
 }
 
@@ -28,16 +28,16 @@ pre='^[0-9A-Za-z\.]+$'
 echo "[***] Current Build: ${TAG}"
 
 if [ ! -z $MAJOR ] && [[ $MAJOR =~ $num ]]; then
-    add_tag ${MAJOR}
+    add_tag_suffix ${MAJOR}
 
     if [ ! -z $MINOR ] && [[ $MINOR =~ $num ]]; then
-        add_tag ${MAJOR}.${MINOR}
+        add_tag_suffix ${MAJOR}.${MINOR}
 
         if [ ! -z $PATCH ] && [[ $PATCH =~ $num ]]; then
-            add_tag ${MAJOR}.${MINOR}.${PATCH}
+            add_tag_suffix ${MAJOR}.${MINOR}.${PATCH}
 
             if [ ! -z $PRLS ] && [[ ! $PRLS =~ $num ]] && [[ $PRLS =~ $pre ]]; then
-                add_tag ${MAJOR}.${MINOR}.${PATCH}-${PRLS}
+                add_tag_suffix ${MAJOR}.${MINOR}.${PATCH}-${PRLS}
             fi
         fi
     fi
