@@ -22,7 +22,8 @@ RUN echo >>/docker-meta.yml "- name: ${NAME}" \
     && echo >>/docker-meta.yml "  docker_tag: ${DOCKER_TAG}" \
     && echo >>/docker-meta.yml "  dockerfile_path: ${DOCKERFILE_PATH}" \
     && echo >>/docker-meta.yml "  dockerfile: |" \
-    && sed >>/docker-meta.yml 's/^/    /' <"${DOCKERFILE_PATH}"
+    && sed >>/docker-meta.yml 's/^/    /' \
+        </home/llama/provision/"${DOCKERFILE_PATH}"
 
 # install git-lfs and conda
 RUN su llama -c "bash -i -c ' \
