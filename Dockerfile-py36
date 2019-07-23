@@ -1,5 +1,6 @@
 FROM stefco/llama-base:alpine
 
+ARG DOCKER_META
 COPY . /home/llama/provision
 
 # install git-lfs and conda
@@ -13,7 +14,8 @@ RUN su llama -c "bash -i -c ' \
         && pip install -r ~/provision/requirements.txt \
         && rm -r ~/miniconda3/pkgs \
 '" \
-    && apk --no-cache add graphviz font-bitstream-type1 \
+    && apk --no-cache add git openssh graphviz font-bitstream-type1 \
+    && echo "${DOCKER_META}" >>/docker-meta.yml \
     && rm -rf /home/llama/provision
 USER llama
 WORKDIR /home/llama
