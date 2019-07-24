@@ -29,8 +29,8 @@ RUN echo >>/docker-meta.yml "- name: ${NAME}" \
 RUN su llama -c "bash -i -c ' \
     cd ~ \
         && type conda \
-        && conda env create -f ~/provision/llama-py37.yml \
-        && echo conda\ activate\ llama-py37\ >>~/.bashrc \
+        && conda env create -f ~/provision/llama-${DOCKER_TAG}.yml \
+        && echo conda\ activate\ llama-${DOCKER_TAG}\ >>~/.bashrc \
         && cat ~/.bashrc \
         && source ~/.bashrc \
         && pip install -r ~/provision/requirements.txt \

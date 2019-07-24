@@ -19,4 +19,5 @@ docker build \
     --build-arg DOCKER_TAG="${DOCKER_TAG}" \
     --build-arg DOCKERFILE_PATH="${DOCKERFILE_PATH}" \
     --file "${DOCKERFILE_PATH}" \
+    "$@" \
     -t ${NAME} .
