@@ -1,4 +1,3 @@
-# SEE LLAMA REPOSITORY FOR MASTER COPY
 # ligo.skymap
 # ligo-gracedb
 # ligo-lvalert
