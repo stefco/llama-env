@@ -35,7 +35,7 @@ RUN echo >>/docker-meta.yml "- name: ${NAME}" \
 # END CREATE docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:alpine
+FROM stefco/llama-base:deb-datagrid
 ARG DOCKER_TAG
 
 #------------------------------------------------------------------------------
