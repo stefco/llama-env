@@ -38,8 +38,15 @@ if current_tag="`git describe --tags`"; then
             if diff "${DOCKERFILE_PATH}" "$last_dockerfile"; then
                 echo "Dockerfile $last_tag:$DOCKERFILE_PATH changed from"
                 echo "$current_tag:$DOCKERFILE_PATH, pulling: ${NAME}"
-                docker pull "${NAME}"
-                exit
+                # try pulling the last version of the image
+                last_image="${NAME}"-"${last_tag/v/}"  # remove prefixed 'v'
+                if docker pull "${last_image}"; then
+                    echo "Pulled image ${last_image} successfully, skipping build."
+                    docker tag "${last_image}" "${NAME}"
+                    exit
+                else
+                    echo "Failed to pull ${last_image}, rebuilding."
+                fi
             else
                 echo "Dockerfile changed since last tag, rebuilding."
             fi
