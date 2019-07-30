@@ -11,6 +11,16 @@ echo "[***] Build hook running"
 
 REPO="$(awk -F'/' '{print $(NF-1) "/" $NF}' <<<"${DOCKER_REPO}")"
 NAME="${REPO}:${DOCKER_TAG}"
+last_dockerfile=''
+
+cleanup(){
+    if [[ -f "${last_dockerfile}" ]]; then
+        echo "Deleting old Dockerfile at ${last_dockerfile}"
+        rm "${last_dockerfile}"
+    else
+        echo "No old Dockerfile found to delete."
+    fi
+}
 
 # See if we have changed anything since the last tag.
 # If not, just reuse the old image.
@@ -22,7 +32,8 @@ if current_tag="`git describe --tags`"; then
         last_dockerfile="$last_tag"-${DOCKERFILE_PATH}
         if git show "$last_tag"^:${DOCKERFILE_PATH} >"$last_dockerfile"; then
             echo Copied last dockerfile to $last_dockerfile
-            if ! diff "${DOCKERFILE_PATH}" "$last_dockerfile"; then
+            # diff returns True if there is *no* difference
+            if diff "${DOCKERFILE_PATH}" "$last_dockerfile"; then
                 echo "Dockerfile $last_tag:$DOCKERFILE_PATH changed from"
                 echo "$current_tag:$DOCKERFILE_PATH, pulling: ${NAME}"
                 docker pull "${NAME}"
