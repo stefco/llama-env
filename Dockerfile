@@ -55,7 +55,7 @@ RUN su llama -c "bash -i -c ' \
     cd ~ \
         && echo Docker tag: ${DOCKER_TAG} \
         && sed s/{DOCKER_TAG}/${DOCKER_TAG}/ ~/provision/llama-env.yml \
-            | sed s/{PYTHON_MINOR}/${DOCKER_TAG:(-1)}/ \
+            | sed s/{PYTHON_MINOR}/`printf '%s' ${DOCKER_TAG} | tail -c1`/ \
                 >~/llama-${DOCKER_TAG}.yml \
         && if [[ $DOCKER_TAG == *heavy* ]]; then \
                 echo CONDA HEAVY SELECTED, UNCOMMENTING OPTIONAL LIGO DEPS; \
@@ -74,7 +74,9 @@ RUN su llama -c "bash -i -c ' \
         && pip install -r ~/provision/requirements.txt \
         && rm -r ~/miniconda3/pkgs \
 '" \
-    && apk --no-cache add git openssh graphviz font-bitstream-type1 \
+    && apt-get -y update \
+    && apt-get install -y --no-install-recommends vim git openssh graphviz \
+    && rm -rf /var/lib/apt/lists/* \
     && rm -rf /home/llama/provision
 USER llama
 WORKDIR /home/llama
