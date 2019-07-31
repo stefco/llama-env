@@ -52,7 +52,7 @@ COPY . /home/llama/provision
 
 # install extra packages and conda
 RUN apt-get -y update \
-    && apt-get install -y --no-install-recommends vim git graphviz htop \
+    && apt-get install -y --no-install-recommends vim git graphviz htop ncdu \
     && rm -rf /var/lib/apt/lists/*
 RUN su llama -c "bash -i -c ' \
     cd ~ \
