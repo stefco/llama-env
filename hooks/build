@@ -30,7 +30,11 @@ if current_tag="`git describe --tags`"; then
     echo Current tag: $current_tag
     if last_tag="`git describe --abbrev=0 "$current_tag"^`"; then
         echo Last tag: $last_tag
-        git fetch origin && echo Fetched from origin || echo Could not fetch
+        if git show "$last_tag"^:${DOCKERFILE_PATH} >/dev/null; then
+            echo Last tag available locally, not fetching.
+        else
+            git fetch origin && echo Fetched from origin || echo Could not fetch
+        fi
         last_dockerfile="$last_tag"-${DOCKERFILE_PATH}
         if git show "$last_tag"^:${DOCKERFILE_PATH} >"$last_dockerfile"; then
             echo Copied last dockerfile to $last_dockerfile
