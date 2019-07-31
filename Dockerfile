@@ -60,7 +60,7 @@ RUN su llama -c "bash -i -c ' \
         && sed s/{DOCKER_TAG}/${DOCKER_TAG}/ ~/provision/llama-env.yml \
             | sed s/{PYTHON_MINOR}/`printf '%s' ${DOCKER_TAG} | tail -c1`/ \
                 >~/llama-${DOCKER_TAG}.yml \
-        && if [[ $DOCKER_TAG == *heavy* ]]; then \
+        && if true || [[ $DOCKER_TAG == *heavy* ]]; then \
                 echo CONDA HEAVY SELECTED, UNCOMMENTING OPTIONAL LIGO DEPS; \
                 sed -i.orig "'"'"s/^  # -/  -/"'"'" \
                     ~/llama-${DOCKER_TAG}.yml; \
