@@ -35,7 +35,7 @@ RUN echo >>/docker-meta.yml "- name: ${NAME}" \
 # END CREATE docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:deb-datagrid
+FROM stefco/llama-base:deb-datagrid-0.1.4
 ARG DOCKER_TAG
 
 #------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ COPY . /home/llama/provision
 
 # install extra packages and conda
 RUN apt-get -y update \
-    && apt-get install -y --no-install-recommends vim git graphviz htop ncdu \
+    && apt-get install -y --no-install-recommends vim git graphviz htop ncdu ssh-client \
     && rm -rf /var/lib/apt/lists/*
 RUN su llama -c "bash -i -c ' \
     cd ~ \
