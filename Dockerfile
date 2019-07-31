@@ -50,7 +50,10 @@ RUN cat /new-docker-meta.yml >>/docker-meta.yml \
 
 COPY . /home/llama/provision
 
-# install git-lfs and conda
+# install extra packages and conda
+RUN apt-get -y update \
+    && apt-get install -y --no-install-recommends vim git graphviz \
+    && rm -rf /var/lib/apt/lists/*
 RUN su llama -c "bash -i -c ' \
     cd ~ \
         && echo Docker tag: ${DOCKER_TAG} \
@@ -74,9 +77,6 @@ RUN su llama -c "bash -i -c ' \
         && pip install -r ~/provision/requirements.txt \
         && rm -r ~/miniconda3/pkgs \
 '" \
-    && apt-get -y update \
-    && apt-get install -y --no-install-recommends vim git openssh graphviz \
-    && rm -rf /var/lib/apt/lists/* \
     && rm -rf /home/llama/provision
 USER llama
 WORKDIR /home/llama
