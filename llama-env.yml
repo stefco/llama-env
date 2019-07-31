@@ -18,9 +18,9 @@ dependencies:
   ## python tools
   # - flake8
   - ipython
-  # - jupyter
+  - jupyter
   # - pyflakes
-  # - pylint
+  - pylint
   ## lscsoft packages
   # - bayeswave
   # - bayeswaveutils
