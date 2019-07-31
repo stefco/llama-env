@@ -86,3 +86,4 @@ dependencies:
   - plumbum
   - psycopg2
   - pygments
+  - pgcli
