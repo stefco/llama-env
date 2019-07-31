@@ -24,45 +24,45 @@ cleanup(){
 
 trap "cleanup" EXIT
 
-# See if we have changed anything since the last tag.
-# If not, just reuse the old image.
-if current_tag="`git describe --tags`"; then
-    echo Current tag: $current_tag
-    if last_tag="`git describe --abbrev=0 "$current_tag"^`"; then
-        echo Last tag: $last_tag
-        if git show "$last_tag"^:${DOCKERFILE_PATH} >/dev/null; then
-            echo Last tag available locally, not fetching.
-        else
-            git fetch origin && echo Fetched from origin || echo Could not fetch
-        fi
-        last_dockerfile="$last_tag"-${DOCKERFILE_PATH}
-        if git show "$last_tag"^:${DOCKERFILE_PATH} >"$last_dockerfile"; then
-            echo Copied last dockerfile to $last_dockerfile
-            # diff returns True if there is *no* difference
-            if diff "${DOCKERFILE_PATH}" "$last_dockerfile"; then
-                echo "Dockerfile $last_tag:$DOCKERFILE_PATH changed from"
-                echo "$current_tag:$DOCKERFILE_PATH, pulling: ${NAME}"
-                # try pulling the last version of the image
-                last_image="${NAME}"-"${last_tag/v/}"  # remove prefixed 'v'
-                if docker pull "${last_image}"; then
-                    echo "Pulled image ${last_image} successfully, skipping build."
-                    docker tag "${last_image}" "${NAME}"
-                    exit
-                else
-                    echo "Failed to pull ${last_image}, rebuilding."
-                fi
-            else
-                echo "Dockerfile changed since last tag, rebuilding."
-            fi
-        else
-            echo "Could not show $last_tag:$DOCKERFILE_PATH, rebuilding."
-        fi
-    else
-        echo "Could not find a previous tag, rebuilding."
-    fi
-else
-    echo "No latest tag found, rebuilding."
-fi
+# # See if we have changed anything since the last tag.
+# # If not, just reuse the old image.
+# if current_tag="`git describe --tags`"; then
+#     echo Current tag: $current_tag
+#     if last_tag="`git describe --abbrev=0 "$current_tag"^`"; then
+#         echo Last tag: $last_tag
+#         if git show "$last_tag"^:${DOCKERFILE_PATH} >/dev/null; then
+#             echo Last tag available locally, not fetching.
+#         else
+#             git fetch origin && echo Fetched from origin || echo Could not fetch
+#         fi
+#         last_dockerfile="$last_tag"-${DOCKERFILE_PATH}
+#         if git show "$last_tag"^:${DOCKERFILE_PATH} >"$last_dockerfile"; then
+#             echo Copied last dockerfile to $last_dockerfile
+#             # diff returns True if there is *no* difference
+#             if diff "${DOCKERFILE_PATH}" "$last_dockerfile"; then
+#                 echo "Dockerfile $last_tag:$DOCKERFILE_PATH changed from"
+#                 echo "$current_tag:$DOCKERFILE_PATH, pulling: ${NAME}"
+#                 # try pulling the last version of the image
+#                 last_image="${NAME}"-"${last_tag/v/}"  # remove prefixed 'v'
+#                 if docker pull "${last_image}"; then
+#                     echo "Pulled image ${last_image} successfully, skipping build."
+#                     docker tag "${last_image}" "${NAME}"
+#                     exit
+#                 else
+#                     echo "Failed to pull ${last_image}, rebuilding."
+#                 fi
+#             else
+#                 echo "Dockerfile changed since last tag, rebuilding."
+#             fi
+#         else
+#             echo "Could not show $last_tag:$DOCKERFILE_PATH, rebuilding."
+#         fi
+#     else
+#         echo "Could not find a previous tag, rebuilding."
+#     fi
+# else
+#     echo "No latest tag found, rebuilding."
+# fi
 
 
 docker build \
