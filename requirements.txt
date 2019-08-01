@@ -25,3 +25,4 @@ voevent-parse
 python-digitalocean
 fastentrypoints
 json2html
+graphviz
