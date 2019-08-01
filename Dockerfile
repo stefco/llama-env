@@ -35,7 +35,7 @@ RUN echo >>/docker-meta.yml "- name: ${NAME}" \
 # END CREATE docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:deb-datagrid-0.2.0
+FROM stefco/llama-base:deb-0.3.0
 ARG DOCKER_TAG
 
 #------------------------------------------------------------------------------
@@ -53,6 +53,8 @@ COPY . /home/llama/provision
 # install extra packages and conda
 RUN su llama -c "bash -i -c ' \
     cd ~ \
+        && mkdir -p /home/llama/.local/share \
+        && mkdir -p /home/llama/.cache \
         && echo Docker tag: ${DOCKER_TAG} \
         && sed s/{DOCKER_TAG}/${DOCKER_TAG}/ ~/provision/llama-env.yml \
             | sed s/{PYTHON_MINOR}/`printf '%s' ${DOCKER_TAG} | tail -c1`/ \
