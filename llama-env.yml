@@ -87,5 +87,6 @@ dependencies:
   - psycopg2
   - pygments
   - pgcli
+  - jupyter_contrib_nbextensions
   - jupyter_nbextensions_configurator
   - jupyterthemes
