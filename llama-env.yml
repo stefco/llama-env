@@ -88,3 +88,4 @@ dependencies:
   - pygments
   - pgcli
   - jupyter_nbextensions_configurator
+  - jupyterthemes
