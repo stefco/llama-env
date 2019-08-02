@@ -55,6 +55,8 @@ RUN su llama -c "bash -i -c ' \
     cd ~ \
         && mkdir -p /home/llama/.local/share \
         && mkdir -p /home/llama/.cache \
+        && mkdir -p /home/llama/.jupyter \
+        && mv /home/llama/provision/static/nbconfig /home/llama/.jupyter/nbconfig \
         && echo Docker tag: ${DOCKER_TAG} \
         && sed s/{DOCKER_TAG}/${DOCKER_TAG}/ ~/provision/llama-env.yml \
             | sed s/{PYTHON_MINOR}/`printf '%s' ${DOCKER_TAG} | tail -c1`/ \
