@@ -75,6 +75,7 @@ RUN su llama -c "bash -i -c ' \
         && source ~/.bashrc \
         && pip install -r ~/provision/requirements.txt \
         && rm -r ~/miniconda3/pkgs \
+        && jt -t oceans16 -cellw 80% -lineh 170 -altp -T -vim -f iosevka \
 '" \
     && rm -rf /home/llama/provision
 USER llama
