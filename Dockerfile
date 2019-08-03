@@ -78,6 +78,14 @@ RUN su llama -c "bash -i -c ' \
         && pip install -r ~/provision/requirements.txt \
         && rm -r ~/miniconda3/pkgs \
         && jt -t oceans16 -cellw 80% -lineh 170 -altp -T -vim -f iosevka \
+        && jupyter labextension install \
+            @jupyter-widgets/jupyterlab-manager \
+            ipytree \
+            jupyterlab_voyager \
+            @jupyterlab/toc \
+            jupyterlab-drawio \
+            @krassowski/jupyterlab_go_to_definition \
+            @ryantam626/jupyterlab_code_formatter \
 '" \
     && rm -rf /home/llama/provision
 USER llama

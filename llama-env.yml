@@ -90,3 +90,10 @@ dependencies:
   - jupyter_contrib_nbextensions
   - jupyter_nbextensions_configurator
   - jupyterthemes
+  - ipytree
+  - qgrid
+  - tqdm
+  - black
+  - ipywidgets
+  - jupyterlab
+  - rise
