@@ -26,3 +26,4 @@ python-digitalocean
 fastentrypoints
 json2html
 graphviz
+py-spy
