@@ -81,7 +81,6 @@ RUN su llama -c "bash -i -c ' \
         && jupyter labextension install \
             @jupyter-widgets/jupyterlab-manager \
             ipytree \
-            jupyterlab_voyager \
             @jupyterlab/toc \
             jupyterlab-drawio \
             @krassowski/jupyterlab_go_to_definition \
