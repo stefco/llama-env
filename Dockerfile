@@ -71,7 +71,7 @@ RUN su llama -c "bash -i -c ' \
         && cat ~/llama-${DOCKER_TAG}.yml \
         && type conda \
         && conda env create -f ~/llama-${DOCKER_TAG}.yml \
-        && rm ~/llama-${DOCKER_TAG}.yml \
+        && rm ~/llama-${DOCKER_TAG}.yml* \
         && echo conda\ activate\ llama-${DOCKER_TAG}\ >>~/.bashrc \
         && cat ~/.bashrc \
         && source ~/.bashrc \
