@@ -54,7 +54,7 @@ COPY . /root/provision
 RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && cp -R ~/provision/static/nbconfig ~/.jupyter/nbconfig \
     && conda install -y --file ~/provision/conda.txt \
-    && pip install -y -r ~/provision/requirements.txt \
+    && pip install -r ~/provision/requirements.txt \
     && rm -r /opt/anaconda/pkgs \
     && jt \
         -t oceans16 \
