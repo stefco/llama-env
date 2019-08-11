@@ -10,21 +10,10 @@ help:
 	@echo "  push36         docker push llama-env:py36"
 	@echo "  push37         docker push llama-env:py37"
 
-.PHONY: 36
-36:
-	$(eval export DOCKER_TAG := py36)
-	hooks/build --squash
-
 .PHONY: 37
 37:
 	$(eval export DOCKER_TAG := py37)
 	hooks/build --squash
-
-.PHONY: push36
-push36:
-	$(eval export DOCKER_TAG := py36)
-	docker push $$DOCKER_REPO:$$DOCKER_TAG
-	hooks/post_push
 
 .PHONY: push37
 push37:
