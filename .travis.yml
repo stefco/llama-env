@@ -1,7 +1,6 @@
 language: python
 env:
   matrix:
-    - PYTHON_MINOR=6
     - PYTHON_MINOR=7
 services:
   - docker
