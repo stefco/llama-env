@@ -35,7 +35,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 # END CREATE /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:deb-0.6.4
+FROM stefco/llama-base:deb-0.6.10
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
