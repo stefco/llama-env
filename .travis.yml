@@ -16,3 +16,5 @@ install:
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
   - make push$TARGET
   - echo "Build finished successfully." && exit 0
+notifications:
+  slack: cu-geco:ycdtdb9euz2tkA2wgzOigYZ6
