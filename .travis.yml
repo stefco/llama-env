@@ -3,7 +3,6 @@ env:
   matrix:
     - PYTHON_MINOR=6
     - PYTHON_MINOR=7
-    - PYTHON_MINOR=8
   global:
     - DOCKER_REPO=$TRAVIS_REPO_SLUG
     - DOCKERFILE_PATH=Dockerfile
