@@ -27,5 +27,3 @@ fastentrypoints
 json2html
 graphviz
 py-spy
-cdshealpix
-mocpy

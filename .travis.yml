@@ -1,0 +1,18 @@
+language: python
+env:
+  matrix:
+    - PYTHON_MINOR=6
+    - PYTHON_MINOR=7
+    - PYTHON_MINOR=8
+  global:
+    - TARGET=3$PYTHON_MINOR
+    - DOCKER_REPO=$TRAVIS_REPO_SLUG
+    - DOCKERFILE_PATH=Dockerfile-$TARGET
+services:
+  - docker
+install:
+  - if [ -z "$TRAVIS_TAG" ]; then echo "Not a tag, exiting" && exit 0; fi
+  - make $TARGET
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+  - make push$TARGET
+  - echo "Build finished successfully." && exit 0

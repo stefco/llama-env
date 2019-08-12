@@ -37,6 +37,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 
 FROM stefco/llama-base:deb-0.6.4
 ARG DOCKER_TAG
+ARG PYTHON_MINOR
 
 #------------------------------------------------------------------------------
 # APPEND /etc/docker-meta.yml
@@ -53,6 +54,8 @@ COPY . /root/provision
 # install extra packages and conda packages
 RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && cp -R ~/provision/static/nbconfig ~/.jupyter/nbconfig \
+    && echo python=3.${PYTHON_MINOR} >>~/provision/conda.txt \
+    && cat ~/provision/conda.txt \
     && conda install -y --file ~/provision/conda.txt \
     && pip install -r ~/provision/requirements.txt \
     && rm -r /opt/anaconda/pkgs \
