@@ -5,12 +5,12 @@ env:
     - PYTHON_MINOR=7
     - PYTHON_MINOR=8
   global:
-    - TARGET=3$PYTHON_MINOR
     - DOCKER_REPO=$TRAVIS_REPO_SLUG
-    - DOCKERFILE_PATH=Dockerfile-$TARGET
+    - DOCKERFILE_PATH=Dockerfile
 services:
   - docker
 install:
+  - TARGET=3$PYTHON_MINOR
   - if [ -z "$TRAVIS_TAG" ]; then echo "Not a tag, exiting" && exit 0; fi
   - make $TARGET
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
