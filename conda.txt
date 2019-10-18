@@ -91,3 +91,4 @@ black
 ipywidgets
 jupyterlab
 rise
+memory_profiler
