@@ -27,3 +27,4 @@ fastentrypoints
 json2html
 graphviz
 py-spy
+s3cmd
