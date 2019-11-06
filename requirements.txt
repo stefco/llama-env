@@ -28,3 +28,4 @@ json2html
 graphviz
 py-spy
 s3cmd
+aws-logging-handlers
