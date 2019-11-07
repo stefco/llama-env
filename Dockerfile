@@ -35,7 +35,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 # END CREATE /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:deb-0.7.2
+FROM stefco/llama-base:deb-0.7.3
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
@@ -58,7 +58,7 @@ RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && cat ~/provision/conda.txt \
     && conda install -y --file ~/provision/conda.txt \
     && pip install -r ~/provision/requirements.txt \
-    && conda clean -y --all \
+    && /opt/anaconda/conda clean -y --all \
     && jt \
         -t oceans16 \
         -cellw 80% \
