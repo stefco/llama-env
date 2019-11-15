@@ -7,7 +7,6 @@
 # flask
 # graphviz
 # python-dateutil
-# slackclient
 # pygcn
 # h5py
 # healpy  - i believe this is installed by ligo deps already
@@ -29,3 +28,4 @@ graphviz
 py-spy
 s3cmd
 aws-logging-handlers
+slackclient

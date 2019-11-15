@@ -72,7 +72,6 @@ dependencies:
   - flask
   - graphviz
   - python-dateutil
-  - slackclient  # not available for python 37
   - pygcn  # only available with py_0 variant
   - h5py
   - lxml
