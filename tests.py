@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+print("Checking ligo.skymap version...")
+import ligo.skymap
+print(f"ligo.skymap.__version__: {ligo.skymap.__version__}")
 print("Importing read_sky_map...")
 from ligo.skymap.io.fits import read_sky_map
 print("Importing LVAlertClient...")

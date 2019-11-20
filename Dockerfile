@@ -54,7 +54,6 @@ COPY . /root/provision
 # install extra packages and conda packages
 RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && cp -R ~/provision/static/nbconfig ~/.jupyter/nbconfig \
-    && echo python=3.${PYTHON_MINOR} >>~/provision/conda.txt \
     && cat ~/provision/conda.txt \
     && conda install -y --file ~/provision/conda.txt \
     && pip install -r ~/provision/requirements.txt \
