@@ -1,4 +1,13 @@
 # common build tools
+autoconf
+automake
+bc
+blas
+compilers
+cmake
+gsl
+pkg-config
+swig
 wget
 # python tools
 flake8
