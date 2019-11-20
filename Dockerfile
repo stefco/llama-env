@@ -59,6 +59,9 @@ RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && conda install -y --file ~/provision/conda.txt \
     && pip install -r ~/provision/requirements.txt \
     && conda clean -y --all \
+    && echo "Running python tests" \
+    && echo "Python version: `which python`" \
+    && python ~/provision/tests.py \
     && jt \
         -t oceans16 \
         -cellw 80% \

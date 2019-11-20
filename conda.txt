@@ -36,10 +36,6 @@ lal
 ldas-tools-al
 ldas-tools-diskcacheapi
 ldas-tools-filters
-ldas-tools-frameapi
-ldas-tools-framecpp
-ldas-tools-ldasgen
-libframe
 ligo-followup-advocate
 ligo-gracedb
 ligo-lvalert
@@ -54,7 +50,6 @@ p_astro
 pesummary
 pycbc
 python-ldas-tools-al
-python-ldas-tools-framecpp
 python-ldas-tools-ldasgen
 python-ligo-lw
 python-nds2-client
@@ -66,7 +61,6 @@ astropy
 flask
 graphviz
 python-dateutil
-slackclient  # not available for python 37
 pygcn  # only available with py_0 variant
 h5py
 lxml
@@ -92,3 +86,4 @@ ipywidgets
 jupyterlab
 rise
 memory_profiler
+waitress
