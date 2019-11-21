@@ -35,7 +35,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 # END CREATE /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:deb-0.10.2
+FROM stefco/llama-base:deb-0.10.3
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
@@ -58,6 +58,9 @@ RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && conda install -y --file ~/provision/conda.txt \
     && pip install -r ~/provision/requirements.txt \
     && conda clean -y --all \
+    && ipython profile create default \
+    && cat ~/provision/static/ipython_config.py \
+        >>~/.ipython/profile_default/ipython_config.py \
     && echo "Running python tests" \
     && echo "Python version: `which python`" \
     && python ~/provision/tests.py \
