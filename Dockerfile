@@ -35,7 +35,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 # END CREATE /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:deb-0.10.4
+FROM stefco/llama-base:deb-0.10.5
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
@@ -71,13 +71,6 @@ RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
         -altp -T \
         -vim \
         -f iosevka \
-    && jupyter labextension install \
-        @jupyter-widgets/jupyterlab-manager \
-        ipytree \
-        @jupyterlab/toc \
-        jupyterlab-drawio \
-        @krassowski/jupyterlab_go_to_definition \
-        @ryantam626/jupyterlab_code_formatter \
     && rm -rf /root/provision
 
 WORKDIR /root

@@ -94,6 +94,5 @@ dependencies:
   - tqdm
   - black
   - ipywidgets
-  - jupyterlab
   - rise
   - waitress
