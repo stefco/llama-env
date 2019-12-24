@@ -55,3 +55,4 @@ jupyterlab
 rise
 memory_profiler
 waitress
+watchdog
