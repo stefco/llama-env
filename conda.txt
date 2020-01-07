@@ -58,3 +58,4 @@ waitress
 watchdog
 prompt_toolkit
 filelock
+celery
