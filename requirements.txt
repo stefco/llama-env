@@ -31,3 +31,4 @@ aws-logging-handlers
 slackclient
 tables
 astroquery
+nptyping
