@@ -30,3 +30,4 @@ s3cmd
 aws-logging-handlers
 slackclient
 tables
+astroquery
