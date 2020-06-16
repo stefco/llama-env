@@ -52,6 +52,7 @@ RUN cat /etc/new-docker-meta.yml >>/etc/docker-meta.yml \
 COPY . /root/provision
 
 # install extra packages and conda packages
+RUN conda config --set channel_priority strict
 RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && cp -R ~/provision/static/nbconfig ~/.jupyter/nbconfig \
     && cat ~/provision/conda.txt \
