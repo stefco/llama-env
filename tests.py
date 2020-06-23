@@ -5,8 +5,8 @@ import ligo.skymap
 print(f"ligo.skymap.__version__: {ligo.skymap.__version__}")
 print("Importing read_sky_map...")
 from ligo.skymap.io.fits import read_sky_map
-print("Importing LVAlertClient...")
-from ligo.lvalert import LVAlertClient
+# print("Importing LVAlertClient...")
+# from ligo.lvalert import LVAlertClient
 print("Importing fits...")
 from ligo.skymap.io import fits
 print("Importing GraceDb...")
