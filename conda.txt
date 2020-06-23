@@ -16,8 +16,11 @@ jupyter
 pyflakes
 pylint
 # lscsoft packages
+# TODO: REMOVE:
 ligo-gracedb
-ligo-lvalert
+gracedb_sdk
+#ligo-lvalert
+# TODO: REMOVE:
 ligo.skymap
 #ligotimegps
 # etc
