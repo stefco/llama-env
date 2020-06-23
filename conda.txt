@@ -19,15 +19,15 @@ pylint
 ligo-gracedb
 ligo-lvalert
 ligo.skymap
-ligotimegps
+#ligotimegps
 # etc
-virtualenv
+#virtualenv
 voeventlib
 # llama-specific
 argcomplete
 astropy
 flask
-graphviz
+#graphviz
 python-dateutil
 pygcn  # only available with py_0 variant
 h5py
@@ -53,10 +53,11 @@ black
 ipywidgets
 jupyterlab
 rise
-memory_profiler
+#memory_profiler
 waitress
 watchdog
 prompt_toolkit
 filelock
 celery
 rabbitmq-server
+gdb
