@@ -18,7 +18,7 @@ pylint
 # lscsoft packages
 # TODO: REMOVE:
 ligo-gracedb
-gracedb_sdk
+gracedb-sdk
 #ligo-lvalert
 # TODO: REMOVE:
 ligo.skymap
