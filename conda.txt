@@ -16,15 +16,19 @@ jupyterlab
 ipywidgets
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
-qgrid                                   # pandas table widget
-rise                                    # notebook slideshows
+# pandas table widget
+qgrid
+# notebook slideshows
+rise
 
 # PY/SYS UTILS
 python-dateutil
 psutil
 deprecated
 pygments
-tqdm                                    # progress bar
+# progress bar
+tqdm
+pydantic
 
 # COM INTERFACES
 boto3
