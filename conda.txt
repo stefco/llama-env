@@ -1,5 +1,6 @@
 # BASE NUMERICAL/SCIENTIFIC
 numpy
+numba
 matplotlib
 h5py
 scipy
