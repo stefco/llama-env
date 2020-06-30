@@ -35,17 +35,18 @@ python-dateutil
 pygcn  # only available with py_0 variant
 h5py
 lxml
-matplotlib  # already installed by LIGO dependencies
-numpy  # already installed by LIGO dependencies
+matplotlib
+numpy
 psutil
 scipy
 six
 deprecated
 boto3
 plumbum
-psycopg2
+# psycopg2
+pymongo
 pygments
-pgcli
+# pgcli
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
 jupyterthemes
@@ -64,3 +65,4 @@ filelock
 celery
 rabbitmq-server
 gdb
+pydantic
