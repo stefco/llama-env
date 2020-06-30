@@ -1,34 +1,18 @@
-# ligo.skymap
-# ligo-gracedb
-# ligo-lvalert
-# ligo-common
-# argcomplete
-# astropy
-# flask
-# graphviz
-# python-dateutil
-# pygcn
-# h5py
-# healpy  - i believe this is installed by ligo deps already
-# lxml
-# matplotlib
-# numpy
-# psutil
-# scipy
-# six
-# Deprecated
+healpy
 itermplot
-twilio
-untangle
-voevent-parse
-python-digitalocean
-fastentrypoints
 json2html
-graphviz
 py-spy
 s3cmd
-aws-logging-handlers
 slackclient
 tables
 astroquery
 nptyping
+gprof2dot
+profilegraph
+
+# DEPRECATED
+fastentrypoints
+python-digitalocean
+twilio
+voevent-parse
+untangle

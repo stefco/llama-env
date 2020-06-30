@@ -1,4 +1,48 @@
-# common build tools
+# BASE NUMERICAL/SCIENTIFIC
+numpy
+matplotlib
+h5py
+scipy
+astropy
+
+# LIGO-SPECIFIC
+pygcn
+gracedb-sdk
+
+# IPYTHON
+ipython
+jupyter
+jupyterlab
+ipywidgets
+jupyter_contrib_nbextensions
+jupyter_nbextensions_configurator
+qgrid                                   # pandas table widget
+rise                                    # notebook slideshows
+
+# PY/SYS UTILS
+python-dateutil
+psutil
+deprecated
+pygments
+tqdm                                    # progress bar
+
+# COM INTERFACES
+boto3
+pymongo
+argcomplete
+
+# DEBUG/DEV
+gdb
+
+# REMOVAL CANDIDATES
+
+# MV -> DEV?
+flake8
+pyflakes
+pylint
+black
+
+# MAYBE
 autoconf
 automake
 bc
@@ -9,60 +53,26 @@ gsl
 pkg-config
 swig
 wget
-# python tools
-flake8
-ipython
-jupyter
-pyflakes
-pylint
-# lscsoft packages
-# TODO: REMOVE:
-ligo-gracedb
-gracedb-sdk
-#ligo-lvalert
-# TODO: REMOVE:
-ligo.skymap
-#ligotimegps
-# etc
-#virtualenv
-voeventlib
-# llama-specific
-argcomplete
-astropy
 flask
-#graphviz
-python-dateutil
-pygcn  # only available with py_0 variant
-h5py
-lxml
-matplotlib
-numpy
-psutil
-scipy
-six
-deprecated
-boto3
-plumbum
-# psycopg2
-pymongo
-pygments
-# pgcli
-jupyter_contrib_nbextensions
-jupyter_nbextensions_configurator
-jupyterthemes
-ipytree
-qgrid
-tqdm
-black
-ipywidgets
-jupyterlab
-rise
-#memory_profiler
 waitress
+
+# DEPRECATED
+ligo.skymap
+lxml
+voeventlib
+plumbum
+six
+ligo-gracedb
 watchdog
-prompt_toolkit
 filelock
-celery
-rabbitmq-server
-gdb
-pydantic
+jupyterthemes
+
+# REMOVED
+#ligo-lvalert
+#ligotimegps
+# psycopg2
+# ipytree
+# pgcli
+#celery
+#rabbitmq-server
+#memory_profiler
