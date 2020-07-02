@@ -9,10 +9,10 @@
 # from ligo.lvalert import LVAlertClient
 # print("Importing fits...")
 # from ligo.skymap.io import fits
-print("Importing GraceDb...")
-from ligo.gracedb.rest import GraceDb as LigoGraceDb, HTTPError
-print("Importing astropy_healpix...")
-import astropy_healpix
+# print("Importing GraceDb...")
+# from ligo.gracedb.rest import GraceDb as LigoGraceDb, HTTPError
+# print("Importing astropy_healpix...")
+# import astropy_healpix
 print("Importing astropy.io....")
 import astropy.io
 print("Importing astropy.table...")
