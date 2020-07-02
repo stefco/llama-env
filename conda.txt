@@ -1,6 +1,5 @@
 # BASE NUMERICAL/SCIENTIFIC
 numpy
-numba
 matplotlib
 h5py
 scipy
@@ -17,15 +16,12 @@ jupyterlab
 ipywidgets
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
-# pandas table widget
-qgrid
 # notebook slideshows
 rise
 
 # PY/SYS UTILS
 python-dateutil
 psutil
-deprecated
 pygments
 # progress bar
 tqdm
@@ -34,7 +30,6 @@ pydantic
 # COM INTERFACES
 boto3
 pymongo
-argcomplete
 
 # DEBUG/DEV
 gdb
@@ -54,8 +49,15 @@ gsl
 pkg-config
 swig
 wget
-flask
-waitress
+
+# DEBUG REMOVAL
+#deprecated
+#flask
+#waitress
+## pandas table widget
+#qgrid
+#argcomplete
+#numba
 
 # DEPRECATED
 ligo.skymap
