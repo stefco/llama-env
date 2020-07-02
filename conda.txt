@@ -42,10 +42,6 @@ gdb
 # REMOVAL CANDIDATES
 
 # MV -> DEV?
-flake8
-pyflakes
-pylint
-black
 
 # MAYBE
 autoconf
@@ -64,15 +60,15 @@ waitress
 # DEPRECATED
 ligo.skymap
 lxml
-voeventlib
 plumbum
-six
 ligo-gracedb
-watchdog
-filelock
 jupyterthemes
 
 # REMOVED
+# filelock
+# watchdog
+# six
+# voeventlib
 #ligo-lvalert
 #ligotimegps
 # psycopg2
