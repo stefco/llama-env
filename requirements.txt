@@ -1,7 +1,7 @@
 healpy
 itermplot
 json2html
-py-spy
+#py-spy
 s3cmd
 slackclient
 tables
@@ -14,5 +14,5 @@ profilegraph
 fastentrypoints
 python-digitalocean
 twilio
-voevent-parse
+#voevent-parse
 untangle

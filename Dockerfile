@@ -35,7 +35,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 # END CREATE /etc/docker-meta.yml
 #------------------------------------------------------------------------------
 
-FROM stefco/llama-base:deb-0.12.2
+FROM stefco/llama-base:deb-0.12.3
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
@@ -54,7 +54,6 @@ COPY . /root/provision
 # install extra packages and conda packages
 RUN conda config --set channel_priority strict
 RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
-    && cp -R ~/provision/static/nbconfig ~/.jupyter/nbconfig \
     && cat ~/provision/conda.txt \
     && conda install -y --file ~/provision/conda.txt \
     && pip install -r ~/provision/requirements.txt \
@@ -65,13 +64,6 @@ RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && echo "Running python tests" \
     && echo "Python version: `which python`" \
     && python ~/provision/tests.py \
-    && jt \
-        -t oceans16 \
-        -cellw 80% \
-        -lineh 170 \
-        -altp -T \
-        -vim \
-        -f iosevka \
     && rm -rf /root/provision
 
 WORKDIR /root

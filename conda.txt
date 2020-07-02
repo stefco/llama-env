@@ -14,14 +14,9 @@ ipython
 jupyter
 jupyterlab
 ipywidgets
-jupyter_contrib_nbextensions
-jupyter_nbextensions_configurator
-# notebook slideshows
-rise
 
 # PY/SYS UTILS
 python-dateutil
-psutil
 pygments
 # progress bar
 tqdm
@@ -58,15 +53,16 @@ wget
 #qgrid
 #argcomplete
 #numba
+# notebook slideshows
+#rise
 
 # DEPRECATED
-ligo.skymap
 lxml
 plumbum
 ligo-gracedb
-jupyterthemes
 
 # REMOVED
+#ligo.skymap
 # filelock
 # watchdog
 # six
@@ -79,3 +75,7 @@ jupyterthemes
 #celery
 #rabbitmq-server
 #memory_profiler
+#jupyter_contrib_nbextensions
+#jupyter_nbextensions_configurator
+#jupyterthemes
+#psutil
