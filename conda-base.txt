@@ -1,0 +1,14 @@
+# DEBUG/DEV
+gdb
+
+# MAYBE
+autoconf
+automake
+bc
+blas
+compilers
+cmake
+gsl
+pkg-config
+swig
+wget

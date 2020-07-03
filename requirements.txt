@@ -1,18 +1,16 @@
 healpy
-itermplot
 json2html
-#py-spy
-s3cmd
 slackclient
-tables
-astroquery
+# numpy, typish
 nptyping
-gprof2dot
-profilegraph
+# no extra deps
+tabulate
 
-# DEPRECATED
-fastentrypoints
-python-digitalocean
+# BIG INSTALL
 twilio
 #voevent-parse
+
+# DEPRECATED
+#tables
 untangle
+#py-spy

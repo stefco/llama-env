@@ -1,0 +1,6 @@
+# INTERACTIVE INSTALL
+s3cmd
+astroquery
+profilegraph
+# numpy, matplotlib, six
+itermplot

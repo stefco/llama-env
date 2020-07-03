@@ -1,0 +1,29 @@
+# DEBUG REMOVAL
+#deprecated
+#flask
+#waitress
+## pandas table widget
+#qgrid
+#argcomplete
+#numba
+# notebook slideshows
+#rise
+
+# REMOVED
+#ligo.skymap
+# filelock
+# watchdog
+# six
+# voeventlib
+#ligo-lvalert
+#ligotimegps
+# psycopg2
+# ipytree
+# pgcli
+#celery
+#rabbitmq-server
+#memory_profiler
+#jupyter_contrib_nbextensions
+#jupyter_nbextensions_configurator
+#jupyterthemes
+#psutil
