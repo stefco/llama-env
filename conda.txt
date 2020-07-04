@@ -29,5 +29,4 @@ pymongo
 # MV -> DEV?
 
 # DEPRECATED
-lxml
 ligo-gracedb
