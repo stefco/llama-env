@@ -1,0 +1,3 @@
+# DEBUG/DEV
+gdb
+wget
