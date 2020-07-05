@@ -55,6 +55,7 @@ COPY . /root/provision
 
 # install extra packages and conda packages
 RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
+    && conda config --set channel_priority strict \
     && cat >~/provision/CONDA.txt \
         ~/provision/conda-base.txt  \
         ~/provision/conda.txt \
