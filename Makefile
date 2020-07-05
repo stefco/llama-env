@@ -29,7 +29,14 @@ help:
 .PHONY: push37
 push37:
 	$(eval export DOCKER_TAG := py37)
+	# push base env
 	docker push $$DOCKER_REPO:$$DOCKER_TAG
-	hooks/post_push
+	hooks/post_push ""
 	docker tag $$DOCKER_REPO:$$DOCKER_TAG $$DOCKER_REPO:latest
 	docker push $$DOCKER_REPO:latest
+	# push ipy env
+	$(eval export SUFFIX := -ipy)
+	docker push $$DOCKER_REPO$$SUFFIX:$$DOCKER_TAG
+	hooks/post_push $$SUFFIX
+	docker tag $$DOCKER_REPO$$SUFFIX:$$DOCKER_TAG $$DOCKER_REPO$$SUFFIX:latest
+	docker push $$DOCKER_REPO$$SUFFIX:latest

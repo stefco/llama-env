@@ -4,7 +4,7 @@
 # https://semver.org/
 
 REPO="$(awk -F'/' '{print $(NF-1) "/" $NF}' <<<"${DOCKER_REPO}")"
-NAME="${REPO}:${DOCKER_TAG}"
+NAME="${REPO}${1}:${DOCKER_TAG}"
 function add_tag_suffix() {
     echo "[***] Adding tag ${1}"
     docker tag $NAME $NAME-$1
