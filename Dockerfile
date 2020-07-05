@@ -36,8 +36,8 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 #==============================================================================
 
 #==============================================================================
-# CREATE llama-env-intermediate
-FROM stefco/llama-base:deb-0.12.3 AS llama-env-intermediate
+# CREATE llama-env
+FROM stefco/llama-base:deb-0.12.3 AS llama-env
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
@@ -68,27 +68,16 @@ RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && echo "Running python tests" \
     && echo "Python version: `which python`" \
     && python ~/provision/tests.py \
-
-WORKDIR /root
-# END CREATE llama-env-intermediate
-#==============================================================================
-
-
-#==============================================================================
-# CREATE llama-env
-FROM llama-env-intermediate AS llama-env
-# END CREATE llama-env
-#==============================================================================
-
-RUN echo "Making llama-env" \
     && conda clean -y --all \
     && rm -rf /root/provision
+
+WORKDIR /root
+# END CREATE llama-env
+#==============================================================================
 
 #==============================================================================
 # CREATE llama-env-ipy
 FROM llama-env-intermediate AS llama-env-ipy
-# END CREATE llama-env-ipy
-#==============================================================================
 
 RUN echo "Making llama-env-ipy" \
     && echo "Contents of ~/provision/conda-ipy.txt to be installed:" \
@@ -102,3 +91,5 @@ RUN echo "Making llama-env-ipy" \
     && cat ~/provision/static/ipython_config.py \
         >>~/.ipython/profile_default/ipython_config.py \
     && rm -rf /root/provision
+# END CREATE llama-env-ipy
+#==============================================================================
