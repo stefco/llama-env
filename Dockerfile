@@ -37,7 +37,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 
 #==============================================================================
 # CREATE llama-env
-FROM stefco/llama-base:deb-0.12.3 AS llama-env
+FROM stefco/llama-base:deb-0.12.4 AS llama-env
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
