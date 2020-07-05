@@ -79,6 +79,8 @@ WORKDIR /root
 # CREATE llama-env-ipy
 FROM llama-env AS llama-env-ipy
 
+COPY . /root/provision
+
 RUN echo "Making llama-env-ipy" \
     && echo "Contents of ~/provision/conda-ipy.txt to be installed:" \
     && cat ~/provision/conda-ipy.txt \
