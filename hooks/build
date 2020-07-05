@@ -78,7 +78,9 @@ docker build \
     --file "${DOCKERFILE_PATH}" \
     "$@" \
     --target llama-env \
-    -t ${NAME} .
+    -t llama-env .
+
+docker tag llama-env "${NAME}"
 
 docker build \
     --build-arg NAME="${NAME}" \
@@ -93,4 +95,6 @@ docker build \
     --file "${DOCKERFILE_PATH}" \
     "$@" \
     --target llama-env-ipy \
-    -t ${NAME}-ipy .
+    -t llama-env-ipy .
+
+docker tag llama-env-ipy "${REPO}-ipy:${DOCKER_TAG}"
