@@ -55,6 +55,7 @@ COPY . /root/provision
 
 # install extra packages and conda packages
 RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
+    && conda activate \
     && conda config --set channel_priority strict \
     && cat >~/provision/CONDA.txt \
         ~/provision/conda-base.txt  \
@@ -83,6 +84,7 @@ FROM llama-env AS llama-env-ipy
 COPY . /root/provision
 
 RUN echo "Making llama-env-ipy" \
+    && conda activate \
     && echo "Contents of ~/provision/conda-ipy.txt to be installed:" \
     && cat ~/provision/conda-ipy.txt \
     && conda install -y --file ~/provision/conda-ipy.txt \
