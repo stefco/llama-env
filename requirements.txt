@@ -13,5 +13,4 @@ twilio
 
 # DEPRECATED
 #tables
-untangle
 #py-spy
