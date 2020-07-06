@@ -37,7 +37,7 @@ RUN echo >>/etc/docker-meta.yml "- name: ${NAME}" \
 
 #==============================================================================
 # CREATE llama-env
-FROM stefco/llama-base:deb-0.12.5 AS llama-env
+FROM stefco/llama-base:deb-0.13.0 AS llama-env
 ARG DOCKER_TAG
 ARG PYTHON_MINOR
 
@@ -95,6 +95,10 @@ RUN echo "Making llama-env-ipy" \
     && ipython profile create default \
     && cat ~/provision/static/ipython_config.py \
         >>~/.ipython/profile_default/ipython_config.py \
+    && echo "Contents of ~/provision/labextensions-ipy.txt to be installed:" \
+    && cat ~/provision/labextensions-ipy.txt \
+    && xargs <~/provision/labextensions-ipy.txt \
+        jupyter labextension install --clean \
     && rm -rf /root/provision
 # END CREATE llama-env-ipy
 #==============================================================================

@@ -2,3 +2,5 @@ ipython
 jupyter
 jupyterlab
 ipywidgets
+ipycytoscape
+nodejs>=10
