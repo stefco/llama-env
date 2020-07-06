@@ -67,6 +67,10 @@ RUN mkdir -p ~/.local/share ~/.cache ~/.jupyter \
     && echo "Contents of ~/provision/requirements.txt to be installed:" \
     && cat ~/provision/requirements.txt \
     && pip install -r ~/provision/requirements.txt \
+    && echo "Contents of ~/provision/labextensions-ipy.txt to be installed:" \
+    && cat ~/provision/labextensions-ipy.txt \
+    && xargs <~/provision/labextensions-ipy.txt \
+        jupyter labextension install --clean \
     && echo "Running python tests" \
     && echo "Python version: `which python`" \
     && python ~/provision/tests.py \
