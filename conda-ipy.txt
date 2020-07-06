@@ -3,3 +3,4 @@ jupyter
 jupyterlab
 ipywidgets
 ipycytoscape
+nodejs
