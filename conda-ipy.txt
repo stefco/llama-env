@@ -3,4 +3,4 @@ jupyter
 jupyterlab
 ipywidgets
 ipycytoscape
-nodejs
+nodejs>=10
