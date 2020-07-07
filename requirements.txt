@@ -1,4 +1,5 @@
 yaxi
+lazytype
 healpy
 json2html
 slackclient
