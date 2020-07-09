@@ -1,5 +1,6 @@
 yaxi
 lazytype
+https://bitbucket.org/stefancountryman/hpmoc/downloads/hpmoc-latest-py3-none-any.whl
 healpy
 json2html
 slackclient
