@@ -18,6 +18,7 @@ pygments
 # no deps
 tqdm
 # no deps
+deprecated
 pydantic
 
 # COM INTERFACES
