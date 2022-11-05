@@ -46,7 +46,10 @@ jobs:
           [[
             ${{ env.latest_tag_python_minor_version }} = ${{ matrix.python_minor_version }}
               && ${{ env.latest_tag_target }} = ${{ matrix.target }}
-          ]] && include_latest="$repo":$'latest,'
+          ]] \
+            && include_latest=$latest \
+            || include_latest=$tag_base
+          echo >> $GITHUB_ENV dockerhub_full_tag_base_or_latest=$include_latest
           echo >> $GITHUB_ENV \
             llama_build_date="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
           echo >> $GITHUB_ENV llama_version_major=$major
@@ -54,10 +57,6 @@ jobs:
           echo >> $GITHUB_ENV llama_version_patch=$patch
           echo >> $GITHUB_ENV dockerhub_repo=$repo
           echo >> $GITHUB_ENV dockerhub_tag_base=$tag_base
-          printf >> $GITHUB_ENV \
-            'dockerhub_full_tag_base_with_latest="%s%s",' \
-            "$include_latest" \
-            "$repo:$tag_base"
           echo >> $GITHUB_ENV dockerhub_tag_major=$tag_major
           echo >> $GITHUB_ENV dockerhub_tag_minor=$tag_minor
           echo >> $GITHUB_ENV dockerhub_tag_patch=$tag_patch
@@ -69,10 +68,15 @@ jobs:
           push: true
           file: ${{ env.dockerfile_path }}
           target: ${{ matrix.target }}
-          tags: ${{ env.dockerhub_full_tag_base_with_latest }},${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_major }},${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_minor }},${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_patch }}
+          tags: |
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_full_tag_base_or_latest }}
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_base }}
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_major }}
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_minor }}
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_patch }}
           build-args: |
             NAME=${{ env.dockerhub_name }}:${{ env.dockerhub_tag_patch }}
-            VERSION=${{ github.ref_name }}
+            VERSION='${{ github.ref_name }}'
             COMMIT=${{ github.sha }}
             URL=${{ github.repositoryUrl }}
             DATE=${{ env.llama_build_date }}
