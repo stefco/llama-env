@@ -1,0 +1,86 @@
+# https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-using-a-docker-hub-action
+# https://github.com/marketplace/actions/build-and-push-docker-images
+name: Build llama-env
+run-name: Build llama-env ${{ github.ref_name }}
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    environment: Build & Deploy
+    env:
+      dockerhub_owner: stefco
+      dockerhub_name: llama-env
+      dockerfile_path: Dockerfile
+      latest_tag_python_minor_version: 10
+      latest_tag_target: llama-env
+    strategy:
+      matrix:
+        python_minor_version: [9, 10]
+        target: ['llama-env', 'llama-env-ipy']
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Set Environment Variables
+        run: |
+          read major minor patch rest <<<$(sed 's/\./ /g;s/[^0-9 ]//g' <<<'${{ github.ref_name }}')
+          tag_base=py3.${{ matrix.python_minor_version }}
+          tag_major=$tag_base-v$major
+          tag_minor=$tag_major.$minor
+          tag_patch=$tag_minor.$patch
+          repo=${{ env.dockerhub_owner }}/${{ env.dockerhub_name }}
+          [[
+            ${{ env.latest_tag_python_minor_version }} = ${{ matrix.python_minor_version }}
+              && ${{ env.latest_tag_target }} = ${{ matrix.target }}
+          ]] && include_latest="$repo":$'latest\n'
+          echo >> $GITHUB_ENV \
+            llama_build_date="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo >> $GITHUB_ENV llama_version_major=$major
+          echo >> $GITHUB_ENV llama_version_minor=$minor
+          echo >> $GITHUB_ENV llama_version_patch=$patch
+          echo >> $GITHUB_ENV dockerhub_repo=$repo
+          echo >> $GITHUB_ENV dockerhub_tag_base=$tag_base
+          printf >> $GITHUB_ENV \
+            'dockerhub_full_tag_base_with_latest="%s%s"\n' \
+            "$include_latest" \
+            "$repo:$tag_base"
+          echo >> $GITHUB_ENV dockerhub_tag_major=$tag_major
+          echo >> $GITHUB_ENV dockerhub_tag_minor=$tag_minor
+          echo >> $GITHUB_ENV dockerhub_tag_patch=$tag_patch
+      -
+        # https://github.com/docker/build-push-action#customizing
+        name: Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          file: ${{ env.dockerfile_path }}
+          target: ${{ matrix.target }}
+          tags: |
+            ${{ env.dockerhub_full_tag_base_with_latest }}
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_major }}
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_minor }}
+            ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_patch }}
+          build-args: |
+            NAME=${{ env.dockerhub_name }}:${{ env.dockerhub_tag_patch }}
+            VERSION=${{ github.ref_name }}
+            COMMIT=${{ github.sha }}
+            URL=${{ github.repositoryUrl }}
+            DATE=${{ env.llama_build_date }}
+            REPO=${{ env.dockerhub_repo }}
+            DOCKER_TAG=${{ env.dockerhub_tag_patch }}
+            DOCKERFILE_PATH=${{ env.dockerfile_path }}
+            PYTHON_MINOR=${{ matrix.python_minor_version }}
