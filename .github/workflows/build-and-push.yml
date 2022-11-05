@@ -47,7 +47,7 @@ jobs:
             ${{ env.latest_tag_python_minor_version }} = ${{ matrix.python_minor_version }}
               && ${{ env.latest_tag_target }} = ${{ matrix.target }}
           ]] \
-            && include_latest=$latest \
+            && include_latest=latest \
             || include_latest=$tag_base
           echo >> $GITHUB_ENV dockerhub_full_tag_base_or_latest=$include_latest
           echo >> $GITHUB_ENV \
