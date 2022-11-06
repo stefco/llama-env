@@ -13,7 +13,6 @@ jobs:
     environment: Build & Deploy
     env:
       dockerhub_owner: stefco
-      dockerhub_name: llama-env
       dockerfile_path: Dockerfile
       latest_tag_python_minor_version: 10
       latest_tag_target: llama-env
@@ -42,7 +41,7 @@ jobs:
           tag_major=$tag_base-v$major
           tag_minor=$tag_major.$minor
           tag_patch=$tag_minor.$patch
-          repo=${{ env.dockerhub_owner }}/${{ env.dockerhub_name }}
+          repo=${{ env.dockerhub_owner }}/${{ matrix.target }}
           [[
             ${{ env.latest_tag_python_minor_version }} = ${{ matrix.python_minor_version }}
               && ${{ env.latest_tag_target }} = ${{ matrix.target }}
@@ -75,7 +74,7 @@ jobs:
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_minor }}
             ${{ env.dockerhub_repo }}:${{ env.dockerhub_tag_patch }}
           build-args: |
-            NAME=${{ env.dockerhub_name }}:${{ env.dockerhub_tag_patch }}
+            NAME=${{ matrix.target }}:${{ env.dockerhub_tag_patch }}
             VERSION='${{ github.ref_name }}'
             COMMIT=${{ github.sha }}
             URL=${{ github.repositoryUrl }}
